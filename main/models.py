@@ -1,0 +1,36 @@
+import uuid
+from django.db import models
+
+class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('jersey', 'Jersey'),
+        ('sepatu', 'Sepatu'),
+        ('peralatan', 'Peralatan'),
+        ('aksesoris', 'Aksesoris'),
+        ('jaket', 'Jaket'),
+    ]
+
+    name = models.CharField(max_length=40)
+    price = models.IntegerField(default=0)
+    description = models.TextField()
+    thumbnail = models.URLField(blank=True, null=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    is_featured = models.BooleanField(default=False)
+    stock = models.PositiveIntegerField(default=0)
+    brand = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.name
+    
+    @property
+    def is_product_featured(self):
+        return self.is_featured
+        
+    def increment_stock(self):
+        self.stock += 1
+        self.save()
+
+    def decrement_stock(self):
+        if self.stock > 0:
+            self.stock -= 1
+            self.save()
