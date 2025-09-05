@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 
 class Product(models.Model):
@@ -22,15 +21,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    @property
-    def is_product_featured(self):
-        return self.is_featured
+    # @property
+    # def is_product_featured(self):
+    #     return self.is_featured
         
-    def increment_stock(self):
-        self.stock += 1
-        self.save()
+    # def increment_stock(self):
+    #     self.stock += 1
+    #     self.save()
 
-    def decrement_stock(self):
-        if self.stock > 0:
-            self.stock -= 1
-            self.save()
+    # def decrement_stock(self):
+    #     if self.stock > 0:
+    #         self.stock -= 1
+    #         self.save()
