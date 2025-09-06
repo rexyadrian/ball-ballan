@@ -234,4 +234,6 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 
 ### Bagan Arsitektur Django
 
+![](assets/mvt.png)
+
 ### Menjawab Pertanyaan
