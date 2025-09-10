@@ -239,11 +239,15 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 ### Menjawab Pertanyaan
 
 1. Jelaskan peran ```settings.py``` dalam proyek Django!
+
     Jawab:
+
     Peran ```settings.py``` pada proyek Django adalah sebagai pusat kontrol semua konfigurasi pada proyek Django, seperti ```ALLOWED_HOST```, ```INSTALLED_APPS```, ```TEMPLATES```, ```DATABASES```, dan lain-lain, serta mengatur konfigurasi seperti bahasa, zona waktu, dan lain-lain.
 
 2. Bagaimana cara kerja migrasi database di Django?
+
     Jawab:
+
     Di Django, migrasi database adalah proses yang menghubungkan perubahan pada model Python dengan struktur yang sebenarnya ada di dalam database. Django menggunakan migrasi agar pengembang tidak perlu menulis perintah SQL secara manual setiap kali ada penyesuaian. prosesnya adalah:
     
     Mengubah ```models.py``` seperti menambah field atau atribut.
@@ -257,15 +261,20 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
         ```bash
         python manage.py migrate
         ```
+
     Cek migrasi yang telah dijalankan (opsional)
         ```bash
         python manage.py showmigrations
         ```
 
 3. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+
     Jawab:
+
     Salah satu alasan Django dijadikan permulaan pembelajaran pengembangan perangkat lunak karena django merupakan framework yang ramah pemula. Salah satunya karena berbasis python, yang merupakan bahasa yang mudah dipahami, bahkan orang non-IT sekalipun. Selain fitur bawaan (auth, admin, ORM, middleware, dll), Django memiliki banyak library untuk memudahkan pengembang yang bisa dipakai untuk menambah fitur pada aplikasi. Dari sisi komunitas, Django memiliki dokumentasi yang sangat lengkap serta materi tutorial yang sangat banyak. Hal ini membuat pembelajaran lebih mudah untuk diikuti, bahkan bagi yang baru masuk ke dunia pemrograman web.
 
 4. Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?
+
     Jawab:
+
     Menurut saya, asdos pada tutorial 1 sudah cukup membantu.
