@@ -253,19 +253,16 @@ Di Django, migrasi database adalah proses yang menghubungkan perubahan pada mode
 Mengubah ```models.py``` seperti menambah field atau atribut.
 
 Membuat file migrasi pada terminal:
-
     ```
     python manage.py makemigrations
     ```
 
 Menjalankan migrasi dengan command:
-
     ```
     python manage.py migrate
     ```
 
 Cek migrasi yang telah dijalankan (opsional)
-
     ```
     python manage.py showmigrations
     ```
