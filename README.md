@@ -1,8 +1,14 @@
-# Ball-Ballan
+# Ball-Ballan 
 
 Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 sebagai pemenuhan tugas mata kuliah Pemrograman Berbasis Platform (PBP).
 
+🔗 Link Deployment:https://rexy-adrian-ballballan.pbp.cs.ui.ac.id/
+
+---
+
 ## Tugas 2
+
+---
 
 ### Proses Pembuatan Proyek Django
 
@@ -278,3 +284,9 @@ Salah satu alasan Django dijadikan permulaan pembelajaran pengembangan perangkat
 Jawab:
 
 Menurut saya, asdos pada tutorial 1 sudah cukup membantu.
+
+---
+
+## Tugas 3
+
+---
