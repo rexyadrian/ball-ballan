@@ -15,21 +15,23 @@ class Product(models.Model):
     thumbnail = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     is_featured = models.BooleanField(default=False)
+
     stock = models.PositiveIntegerField(default=0)
     brand = models.CharField(max_length=20)
+    sold = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.name
     
-    # @property
-    # def is_product_featured(self):
-    #     return self.is_featured
+    @property
+    def is_product_best_seller(self):
+        return self.sold > 40
         
-    # def increment_stock(self):
-    #     self.stock += 1
-    #     self.save()
+    def increment_stock(self):
+        self.stock += 1
+        self.save()
 
-    # def decrement_stock(self):
-    #     if self.stock > 0:
-    #         self.stock -= 1
-    #         self.save()
+    def decrement_stock(self):
+        if self.stock > 0:
+            self.stock -= 1
+            self.save()
