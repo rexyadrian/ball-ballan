@@ -188,7 +188,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
     > Import render dari modul shortcut dan akan digunakan untuk render html
     > Menambahkan fungsi show_main untuk mengatur HTTP request dan return tampilan yang sesuai (pada variabel ```context```)
 
-7. 16. Melakukan routing pada aplikasi ```main``` pada file ```urls.py``` di direktori main:
+7. Melakukan routing pada aplikasi ```main``` pada file ```urls.py``` di direktori main:
     ```python
     from django.urls import path
     from main.views import show_main
@@ -293,4 +293,13 @@ Menurut saya, asdos pada tutorial 1 sudah cukup membantu.
 
 ## Mengapa data delivery diperlukan dalam pengimplementasian sebuah platform?
 
----
+## XML vs JSON? Kenapa JSON lebih populer?
+
+## Fungsi is_valid() pada Django
+
+## Mengapa ```csrf_token``` dibutuhkan saat membuat form Django?
+
+### Bagaimana hal tersebut dapat dimanfaatkan penyerang?
+
+## Implementasi Tugas 3 secara _step by step_
+
