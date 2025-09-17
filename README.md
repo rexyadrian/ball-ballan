@@ -242,17 +242,13 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 
 ![](assets/mvt.png)
 
-## Menjawab Pertanyaan
+---
 
-1. Jelaskan peran ```settings.py``` dalam proyek Django!
+## Jelaskan peran ```settings.py``` dalam proyek Django!
 
-    Jawab:
+Peran ```settings.py``` pada proyek Django adalah sebagai pusat kontrol semua konfigurasi pada proyek Django, seperti ```ALLOWED_HOST```, ```INSTALLED_APPS```, ```TEMPLATES```, ```DATABASES```, dan lain-lain, serta mengatur konfigurasi seperti bahasa, zona waktu, dan lain-lain.
 
-    Peran ```settings.py``` pada proyek Django adalah sebagai pusat kontrol semua konfigurasi pada proyek Django, seperti ```ALLOWED_HOST```, ```INSTALLED_APPS```, ```TEMPLATES```, ```DATABASES```, dan lain-lain, serta mengatur konfigurasi seperti bahasa, zona waktu, dan lain-lain.
-
-2. Bagaimana cara kerja migrasi database di Django?
-
-Jawab:
+## Bagaimana cara kerja migrasi database di Django?
 
 Di Django, migrasi database adalah proses yang menghubungkan perubahan pada model Python dengan struktur yang sebenarnya ada di dalam database. Django menggunakan migrasi agar pengembang tidak perlu menulis perintah SQL secara manual setiap kali ada penyesuaian. prosesnya adalah:
 
@@ -273,13 +269,11 @@ Cek migrasi yang telah dijalankan (opsional)
     python manage.py showmigrations
     ```
 
-3. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
-
-Jawab:
+## Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 
 Salah satu alasan Django dijadikan permulaan pembelajaran pengembangan perangkat lunak karena django merupakan framework yang ramah pemula. Salah satunya karena berbasis python, yang merupakan bahasa yang mudah dipahami, bahkan orang non-IT sekalipun. Selain fitur bawaan (auth, admin, ORM, middleware, dll), Django memiliki banyak library untuk memudahkan pengembang yang bisa dipakai untuk menambah fitur pada aplikasi. Dari sisi komunitas, Django memiliki dokumentasi yang sangat lengkap serta materi tutorial yang sangat banyak. Hal ini membuat pembelajaran lebih mudah untuk diikuti, bahkan bagi yang baru masuk ke dunia pemrograman web.
 
-4. Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?
+### Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?
 
 Jawab:
 
@@ -293,13 +287,59 @@ Menurut saya, asdos pada tutorial 1 sudah cukup membantu.
 
 ## Mengapa data delivery diperlukan dalam pengimplementasian sebuah platform?
 
+Data delivery diperlukan agar client (seperti peramban atau aplikasi lainnya) dapat bertukar informasi dengan server dan memproses informasi tersebut.
+Tanpa data delivery, aplikasi hanya menyimpan data statis dan tidak dapat menampilkan data yang dinamis.
+
 ## XML vs JSON? Kenapa JSON lebih populer?
 
-## Fungsi is_valid() pada Django
+Menurut saya json lebih baik dari xml karena beberapa alasan:
+* Lebih ringkas dan mudah dibaca oleh orang umum maupun developer
+* Menjadi standar di API modern (RESTful API), Hampir semua web service, mobile app, dan microservices menggunakan JSON sebagai format default
+* Lebih ringan dan ukuran data lebih kecil sehingga transfer data lebih cepat dan efisien
+* Kompatibel dan dapat diproses langsung oleh banyak bahasa pemrograman
+
+Karena hal tersebutlah JSON dapat dikatakan lebih populer.
+
+## Fungsi ```is_valid()``` pada Django
+
+Fungsi digunakan untuk memvalidasi data yang dikirim lewat form. Hal ini dibutuhkan untuk mencegah data-data yang tidak valid dari form masuk ke database.
 
 ## Mengapa ```csrf_token``` dibutuhkan saat membuat form Django?
 
-### Bagaimana hal tersebut dapat dimanfaatkan penyerang?
+* ```csrf_token``` adalah token yang digunakan untuk mencegah serangan Cross-Site Request Forgery (CSRF).
+* Jika tidak ada token, penyerang dapat membuat pengguna seolah-oleh meminta request tertentu pada website dan web akan mengeksekusinya. Hal tersebut dapat dimanfaatkan penyerang untuk melakukan aksinya.
+* Dengan adanya ```csrf_token```, setiap form punya token unik yang harus cocok dengan yang di server.
+
+## Postman — Data Delivery
+
+1. **Products (XML)**
+   <img width="1920" height="1080" alt="Screenshot (38)" src="https://github.com/user-attachments/assets/af5db4fd-8150-4d31-93b9-6afcf1dd51e8" />
+
+
+2. **Products (JSON)**
+   <img width="1920" height="1080" alt="Screenshot (39)" src="https://github.com/user-attachments/assets/0e0ec1b4-04d3-4b13-bb82-88d365566947" />
+
+
+3. **Product by ID (XML)**
+   <img width="1920" height="1080" alt="Screenshot (40)" src="https://github.com/user-attachments/assets/a9ea1177-3b88-4dcd-94ed-6a6f01285068" />
+
+
+4. **Product by ID (JSON)**
+    <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/25aa51c7-6b87-4da8-970a-1d12e497f59f" />
 
 ## Implementasi Tugas 3 secara _step by step_
+
+* Membuat base.html sebagai kerangka atau template dasar untuk views. Membuat base html terdeteksi sebagai template dasar di settings.
+* Memodifikasi template main.html agar sesuai template.
+* Menambahkan file add_product.html dan product_detail.html sebagai kerangka untuk forms.
+* Membuat ```forms.py``` sebagai struktur form untuk mennerima produk baru.
+* Membuat fungsi pada views untuk menambahkan produk (add_product), menampilkan detail (show_product), show product xml, show product json, show product xml by id, show product json by id.
+* Membuat URL routing untuk semua views.
+* Menambahkan fitur delivery data (XML, JSON, JSON by id) dengan serializers di views.py.
+* Mengecek hasil di endpoint /xml/, /json/, /xml/<id>/, /json/<id>/.
+* Deploy ke Pacil Web Service.
+
+## Feedback asdos
+
+Asdos pada tutorial 2 sudah cukup membantu.
 
