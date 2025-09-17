@@ -6,13 +6,13 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 
 ---
 
-## Tugas 2
+# Tugas 2
 
 ---
 
-### Proses Pembuatan Proyek Django
+## Proses Pembuatan Proyek Django
 
-#### Membuat Direktori dan Mengaktifkan Virtual Environment
+### Membuat Direktori dan Mengaktifkan Virtual Environment
 
 1. Membuat folder direktori utama proyek bernama ```ball-ballan```.
 2. Memindahkan direktori pada terminal ke direktori utama proyek.
@@ -27,7 +27,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
     env\Scripts\activate
     ```
 
-#### Menyiapkan _Dependencies_ dan Membuat Proyek Django
+### Menyiapkan _Dependencies_ dan Membuat Proyek Django
 
 1. Membuat berkas ```requirements.txt``` dan menambahkan _dependencies_ yang diperlukan.
     isi requirements.txt:
@@ -51,7 +51,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
     django-admin startproject ball_ballan .
     ```
 
-#### Konfigurasi _Environment Variables_ dan Proyek
+### Konfigurasi _Environment Variables_ dan Proyek
 
 1. Membuat file ```.env``` di dalam direktori root proyek dan menambahkan konfigurasi berikut:
     ```
@@ -119,7 +119,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
         }
     ```
 
-#### Membuat Aplikasi ```main```
+### Membuat Aplikasi ```main```
 
 1. Menjalankan command berikut pada terminal:
     ```bash
@@ -200,7 +200,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
     ]
     ```
 
-#### Menjalankan Server
+### Menjalankan Server
 
 1. Jalankan migrasi database dengan command:
     ```bash
@@ -217,7 +217,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
     ```bash
     deactivate
     ```
-#### Unggah Proyek ke Repositori Github
+### Unggah Proyek ke Repositori Github
 
 1. Inisiasi git dengan perintah
     ```bash
@@ -228,7 +228,7 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 
 3. Menghubungkan repositori lokal dengan repositori GitHub, lalu melakukan ```add```, ```commit```, dan ```push```.
 
-#### Deployment ke PWS (Pacil Web Service)
+### Deployment ke PWS (Pacil Web Service)
 
 1. Akses halaman PWS pada https://pbp.cs.ui.ac.id.
 2. Login dengan akun SSO UI.
@@ -238,11 +238,11 @@ Proyek Django sederhana yang dikembangkan oleh Rexy Adrian Fernando 2406495666 s
 6. Menghubungkan repositori lokal dengan repositori GitHub, lalu melakukan ```add```, ```commit```, dan ```push```.
 7. Lakukan ```add```, ```commit```, dan ```push``` ke PWS.
 
-### Bagan Arsitektur Django
+## Bagan Arsitektur Django
 
 ![](assets/mvt.png)
 
-### Menjawab Pertanyaan
+## Menjawab Pertanyaan
 
 1. Jelaskan peran ```settings.py``` dalam proyek Django!
 
@@ -287,6 +287,10 @@ Menurut saya, asdos pada tutorial 1 sudah cukup membantu.
 
 ---
 
-## Tugas 3
+# Tugas 3
+
+---
+
+## Mengapa data delivery diperlukan dalam pengimplementasian sebuah platform?
 
 ---
