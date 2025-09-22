@@ -24,10 +24,10 @@
 <hr>
 
 <a href="?filter=all">
-    <button type="button">All Articles</button>
+    <button type="button">All Product</button>
 </a>
 <a href="?filter=my">
-    <button type="button">My Articles</button>
+    <button type="button">My Product</button>
 </a> 
 
 {% if not product_list %}
@@ -43,10 +43,13 @@
         {% if product.is_featured %} | <b>Featured</b>{% endif %}
         | Stock: {{ product.stock }}
         | Price: {{ product.price }}
+        | brand: {{ product.brand }}
     </p>
 
-    {% if product.thumbnail %}
-    <img src="{{ product.thumbnail }}" alt="thumbnail" width="150" height="100">
+    {% if not product.thumbnail %}
+    <p>Produk tidak memiliki gambar.</p>
+    {% else %}
+    <img src="{{ product.thumbnail }}" alt="thumbnail" width="150" height="150">
     <br />
     {% endif %}
 
