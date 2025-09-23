@@ -343,3 +343,77 @@ Fungsi digunakan untuk memvalidasi data yang dikirim lewat form. Hal ini dibutuh
 
 Asdos pada tutorial 2 sudah cukup membantu.
 
+---
+
+# Tugas 4
+
+---
+
+## Django AuthenticationForm
+
+```AuthenticationForm``` di Django adalah form bawaan (built-in) yang digunakan untuk proses login _user_. Autentikasi dilakukan dengan dengan memeriksa username, password, serta status aktif dari user dengan fungsi ```authenticate()```.
+
+### Kelebihan
+
+* Form login terintegrasi dan sudah disediakan (built-in) sehingga tidak perlu membuat form login secara manual.
+* Dapat Disesuaikan kebutuhan dengan meng-override method bawaannya.
+* Mudah digunakan.
+
+### Kekurangan
+
+* Field default terbatas pada username dan password.
+* Hanya memeriksa ```is_active```. Jika ada ketentuan login tambahan (misalnya verifikasi email, akun diblokir, dll), harus override confirm_login_allowed() atau menambah logika sendiri.
+
+## Perbedaan antara autentikasi dan otorisasi dan bagaiamana Django mengimplementasikannya
+
+### Autentikasi
+Autentikasi (Authentication) → proses memverifikasi identitas seseorang.
+* Contoh: apakah username dan password cocok dengan user yang terdaftar.
+
+#### Implementasi Django
+* Ditangani oleh modul django.contrib.auth.
+
+* Fungsi utama:
+
+    ```python
+    authenticate(request, username, password) # memverifikasi user.
+
+    login(request, user) # menandai user sebagai “authenticated” di session.
+
+    logout(request) # menghapus status autentikasi dari session.
+
+    ```
+* Middleware yang terlibat: ```AuthenticationMiddleware```, yaitu menghubungkan request dengan user (request.user).
+
+
+### Otorisasi
+Otorisasi (Authorization) → proses menentukan hak akses dari user setelah _user_ terverifikasi.
+* Contoh: menentukan page apa saja yang boleh diakses atau diubah olej _user_.
+
+#### Implementasi Django
+* Ditangani lewat permissions dan groups untuk tiap pengguna
+
+* Dekorator & mixin untuk view:
+
+    * ```@login_required```, memastikan user sudah login (autentikasi).
+
+    * ```@permission_required('app_label.permission_codename')```, memastikan user punya izin spesifik (otorisasi).
+
+
+## kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web
+
+
+
+## Risiko potensial yang harus diwaspadai dari penggunaan _cookies_ dan bagaimana Django menangani hal tersebut
+
+
+
+## Implementasi Tugas 4 secara _step by step_
+
+
+
+## Feedback asdos
+
+Asdos pada tutorial 3 sudah cukup membantu. Saya tidak mengalami kesulitan dalam mengerjakan tutorial 3. Penjelasan yang diberikan asdos sudah cukup jelas dan membantu.
+
+---
