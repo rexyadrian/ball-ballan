@@ -383,7 +383,7 @@ Autentikasi (Authentication) → proses memverifikasi identitas seseorang.
     logout(request) # menghapus status autentikasi dari session.
 
     ```
-* Middleware yang terlibat: ```AuthenticationMiddleware```, yaitu menghubungkan request dengan user (request.user).
+* Middleware yang terlibat: ```AuthenticationMiddleware```, untuk menghubungkan request dengan user (request.user).
 
 
 ### Otorisasi
@@ -400,13 +400,58 @@ Otorisasi (Authorization) → proses menentukan hak akses dari user setelah _use
     * ```@permission_required('app_label.permission_codename')```, memastikan user punya izin spesifik (otorisasi).
 
 
-## kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web
+## Kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web
 
+### Cookies
+Data kecil disimpan di browser client dan dikirim bersama setiap request ke server.
 
+#### Kelebihan
+* Ringan karena data disimpan di client, serta stateless di server karena tidak perlu menyimpan data user.
+* Bisa dipakai lintas request/domain.
+* Mudah digunakan karena browser client mendukung cookies secara default.
+
+#### Kekurangan
+* Data yang bisa disimpan terbatas (≈4 KB).
+* Data tidak dienkripsi sehingga rawan untuk disalahgunakan.
+* Tidak cocok untuk data sensitif.
+
+### Session
+Session menyimpan data user di server, dengan hanya session ID dikirim ke browser client.
+
+#### Kelebihan
+* Bisa menyimpan data besar/kompleks karena disimpan di server langsung.
+* Lebih aman karena data penting tidak disimpan di client.
+* Developer punya kontrol penuh di server sehingga bisa hapus/ubah session kapan saja tanpa tergantung client.
+* Terintegrasi dengan proses autentikasi user.
+
+#### Kekurangan
+
+* Membebani server karena semua data session harus disimpan (di memori, file, atau database).
+* Tidak stateless, yang artinya berlawanan dengan prinsip REST (Representational State Transfer) atau server menyimpan state user.
+* Ketergantungan pada cookie karena cookie menyimpan session ID.
 
 ## Risiko potensial yang harus diwaspadai dari penggunaan _cookies_ dan bagaimana Django menangani hal tersebut
 
+### Risiko potensial penggunaan cookies:
+* Pencurian Cookie (Session Hijacking): Jika cookie (misalnya sessionid) dicuri lewat sniffing, penyerang bisa mengambil alih sesi user.
 
+* XSS (Cross-Site Scripting): Jika aplikasi rentan XSS, attacker bisa memasukkan dan mengeksekusi program JavaScript berbahaya untuk mencuri cookie dari browser.
+
+* CSRF (Cross-Site Request Forgery): Penyerang membuat user melakukan request tak diinginkan (misalnya transfer dana) hanya dengan membuat mereka klik link/visit halaman.
+
+* Manipulasi Data Client-Side: Jika developer menyimpan data sensitif langsung di cookie tanpa enkripsi/validasi, user atau oknum bisa mengubah isi cookie.
+
+### Bagaimana django menangani risiko cookie
+
+* HTTPOnly Cookies: Membuat cookie tidak bisa diakses lewat JavaScript → mencegah pencurian via XSS.
+
+* Secure Cookies: Hanya mengirim cookie lewat HTTPS, tidak lewat HTTP.
+
+* SameSite Cookies: Membatasi pengiriman cookie lintas situs → mencegah CSRF.
+
+* CSRF Protection Middleware: Django otomatis memberi token CSRF untuk tiap form POST. Token ini harus cocok dengan yang dikirim user, sehingga request berbahaya bisa ditolak.
+
+* Automatic Session Expiry: Membatasi masa session cookie → meminimalisir risiko penyalahgunaan jangka panjang.
 
 ## Implementasi Tugas 4 secara _step by step_
 
