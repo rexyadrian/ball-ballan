@@ -393,7 +393,7 @@ Otorisasi (Authorization) → proses menentukan hak akses dari user setelah _use
 #### Implementasi Django
 * Ditangani lewat permissions dan groups untuk tiap pengguna
 
-* Dekorator & mixin untuk view:
+* Dekorator untuk view:
 
     * ```@login_required```, memastikan user sudah login (autentikasi).
 
@@ -455,7 +455,24 @@ Session menyimpan data user di server, dengan hanya session ID dikirim ke browse
 
 ## Implementasi Tugas 4 secara _step by step_
 
+### 1. Implementasi Fungsi Register, Login, dan Logout User
+* Membuat fungsi ```register``` dengan memanfaatkan form bawaan Django: ```UserCreationForm()```, dengan request method "POST", kemudian membuat file ```register.html``` sebagai template tampilan untuk user.
+* Membuat fungsi ```login_user``` dengan memanfaatkan form bawaan Django: ```AuthenticationForm```, dan fungsi bawaan Django: ```authenticate``` dan ```login```, dengan request method "POST", kemudian membuat file ```login.html``` sebagai template tampilan untuk user.
+* Membuat fungsi ```logout_user``` dengan memanfaatkan fungsi bawaan Django: ```logout```, yang akan langsung me-_redirect_ tampilan ke laman login.
+* Melakukan routing untuk masing-masing fungsi pada ```urls.py```.
+* Merestriksi tampilan dengan dekorator ```@login_required(login_url='/login')``` pada ```views```.
+* Menambahkan ```response.set_cookie('last_login', str(datetime.datetime.now()))``` untuk mendaftarkan cookie ```last_login```, di ```response```, dengan timestamp, pada fungsi ```login_user```.
+* Menambahkan ```response.delete_cookie('last_login')``` untuk menghapus cookie ```last_login``` dari daftar cookies di ```response```.
 
+### Menghubungkan Model Product dan User
+* Menambahkan variabel user pada product
+  ```python
+      class Product(models.Model):
+      user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+      ...
+  ```
+  * Melakukan migrasi model.
+  * Memodifikasi ```login_user``` untuk mengisi field user dengan nilai ```request.user```, yaitu pengguna yang sedang login. Dengan cara ini, setiap objek yang dibuat akan secara otomatis terhubung dengan pengguna yang membuatnya.
 
 ## Feedback asdos
 
