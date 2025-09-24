@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Ball-Ballan</h1>
+
+<h4>Greetings! {{ name }}</h4>
+
+<!-- <h1>Ball-Ballan</h1>
 
 <h5>App Name: </h5>
 <p>{{ app_name }}</p>
@@ -9,7 +12,8 @@
 <p>{{ name }}</p>
 
 <h5>Class:</h5>
-<p>{{ class }}</p>
+<p>{{ class }}</p> -->
+
 
 <a href="{% url 'main:add_product' %}">
     <button>+ Add Product</button>
