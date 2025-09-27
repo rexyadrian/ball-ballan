@@ -37,26 +37,37 @@
         </div>
 
         <!-- Product Grid -->
-        {% if not product_list %}
-        <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
-            <div class="w-32 h-32 mx-auto mb-4">
-                <img src="https://media1.tenor.com/m/1vDTcDBAz9AAAAAC/miko-iino-slapping.gif" alt="No product available"
-                    class="w-full h-full object-contain">
+         <section id="products">
+            {% if not product_list %}
+            <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+                <div class="w-32 h-32 mx-auto mb-4">
+                    <img src="https://media1.tenor.com/m/1vDTcDBAz9AAAAAC/miko-iino-slapping.gif" alt="No product available"
+                        class="w-full h-full object-contain">
+                </div>
+                <p class="text-gray-500 mb-6">
+                    Iino Miko says "There is no product!"
+                </p>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">
+                    No product found
+                </h3>
+                <p class="text-gray-500 mb-6">
+                    Be the first to share football product with the community.
+                </p>
+                <a href="{% url 'main:add_product' %}"
+                    class="inline-flex items-center px-4 py-2 bg-[#0043ae] text-white rounded-md hover:bg-[#003080] transition-colors">
+                    Add Product
+                </a>
             </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No product found</h3>
-            <p class="text-gray-500 mb-6">Be the first to share football product with the community.</p>
-            <a href="{% url 'main:add_product' %}"
-                class="inline-flex items-center px-4 py-2 bg-[#0043ae] text-white rounded-md hover:bg-[#003080] transition-colors">
-                Add Product
-            </a>
-        </div>
-        {% else %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for product in product_list %}
-            {% include 'card_product.html' with product=product %}
-            {% endfor %}
-        </div>
-        {% endif %}
+            {% else %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for product in product_list %}
+                {% include 'card_product.html' with product=product %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </section>
+            
     </div>
 </div>
+{% include 'footer.html' %}
 {% endblock content %}
