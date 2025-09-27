@@ -20,8 +20,6 @@ def show_main(request):
         product_list = Product.objects.all()
     else:
         product_list = Product.objects.filter(user=request.user)
-
-    product_list = Product.objects.all()
     
     context = {
         'app_name' : 'Ball-Ballan',
