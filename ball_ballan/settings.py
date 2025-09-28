@@ -40,8 +40,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://rexy-adrian-ballballan.pbp.cs.ui.ac.id",
 ]
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -70,7 +68,9 @@ ROOT_URLCONF = 'ball_ballan.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], 
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,7 +142,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

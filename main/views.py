@@ -55,7 +55,8 @@ def login_user(request):
             user = form.get_user()
             login(request, user)
             response = HttpResponseRedirect(reverse("main:show_main"))
-            response.set_cookie('last_login', str(datetime.datetime.now()))
+            datetime_now_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            response.set_cookie('last_login', datetime_now_str)
             return response
 
     else:
