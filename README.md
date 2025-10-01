@@ -456,7 +456,7 @@ Session menyimpan data user di server, dengan hanya session ID dikirim ke browse
 
 ## Implementasi Tugas 4 secara _step by step_
 
-### 1. Implementasi Fungsi Register, Login, dan Logout User
+### Implementasi Fungsi Register, Login, dan Logout User
 * Membuat fungsi ```register``` dengan memanfaatkan form bawaan Django: ```UserCreationForm()```, dengan request method "POST", kemudian membuat file ```register.html``` sebagai template tampilan untuk user.
 * Membuat fungsi ```login_user``` dengan memanfaatkan form bawaan Django: ```AuthenticationForm```, dan fungsi bawaan Django: ```authenticate``` dan ```login```, dengan request method "POST", kemudian membuat file ```login.html``` sebagai template tampilan untuk user.
 * Membuat fungsi ```logout_user``` dengan memanfaatkan fungsi bawaan Django: ```logout```, yang akan langsung me-_redirect_ tampilan ke laman login.
@@ -537,6 +537,33 @@ Implementasi:
 
 ## Flex Box dan Grid Layout
 
-* Flexbox (Flexible Box Layout) digunakan untuk mengatur layout satu dimensi (baris atau kolom). Cocok untuk elemen yang perlu diratakan atau didistribusikan ruangnya, misalnya navbar, tombol sejajar, atau centering.
+### Flexbox (Flexible Box Layout)
+Flexbox digunakan untuk mengatur layout satu dimensi (baris atau kolom). Cocok untuk elemen yang perlu diratakan atau didistribusikan ruangnya, misalnya navbar, tombol sejajar, atau centering.
+contoh:
+```css
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+```
 
-* Grid Layout digunakan untuk mengatur layout dua dimensi (baris dan kolom). Cocok untuk membuat layout kompleks seperti dashboard atau galeri gambar.
+### Grid Layout
+Grid layout digunakan untuk mengatur layout dua dimensi (baris dan kolom). Cocok untuk membuat layout kompleks seperti dashboard atau galeri gambar.
+contoh:
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+```
+
+## Implementasi Tugas 4 secara _step by step_
+
+* Membuat fitur hapus dan edit produk pada ```views.py```
+* Menggunakan framework tailwind css untuk kustomisasi design.
+* Membuat kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya, serta menambahkan card_product.html dan navbar.html
+* Membuat design semua template html agar seragam dan responsive antardevice.
+* Membuat tampilan jika sudah ada produk dan belum ada produk.
