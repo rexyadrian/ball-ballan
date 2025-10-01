@@ -562,8 +562,8 @@ contoh:
 
 ## Implementasi Tugas 4 secara _step by step_
 
-* Membuat fitur hapus dan edit produk pada ```views.py```
+* Membuat fitur hapus dan edit produk pada ```views.py```, routing pada ```urls.py```, lalu template html pada ```edit_product.html```
 * Menggunakan framework tailwind css untuk kustomisasi design.
-* Membuat kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya, serta menambahkan card_product.html dan navbar.html
-* Membuat design semua template html agar seragam dan responsive antardevice.
+* Membuat kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya, serta menambahkan ```card_product.html``` dan ```navbar.html```
+* Membuat design untuk tiap template html agar seragam dan responsive antardevice.
 * Membuat tampilan jika sudah ada produk dan belum ada produk.
