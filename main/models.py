@@ -28,6 +28,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    def get_rupiah_price_format(self):
+        return f"Rp{self.price:,}"
+    
     @property
     def is_product_best_seller(self):
         return self.sold > 40

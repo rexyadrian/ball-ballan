@@ -16,7 +16,7 @@
       </a>
     </div>
 
-    <!-- Article -->
+    <!-- Details -->
     <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
 
       <!-- Header -->
@@ -32,14 +32,10 @@
           {% endif %}
           {% if product.is_product_best_seller %}
           <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
-            Hot
+            Best Seller!
           </span>
           {% endif %}
         </div>
-
-        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
-          {{ product.name }}
-        </h1>
 
       </div>
 
@@ -47,34 +43,49 @@
       {% if product.thumbnail %}
       <div class="px-6 sm:px-8">
         <img src="{{ product.thumbnail }}" alt="{{ product.name }}"
-          class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg">
+          class="w-full h-64 sm:h-80 lg:h-full object-cover rounded-lg">
       </div>
       {% endif %}
 
       <!-- Content -->
       <div class="p-6 sm:p-8">
         <div class="prose prose-lg max-w-none">
-          <div class="text-gray-700 leading-relaxed whitespace-pre-line text-base sm:text-lg">
-            {{ product.description }}
-          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
+            {{ product.name }}
+          </h1>
+
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight mb-4">
+            {{ product.get_rupiah_price_format }}
+          </h2>
         </div>
       </div>
 
-      <!-- Author Info -->
+      <!-- Seller Info -->
       <div class="border-t border-gray-200 p-6 sm:p-8 bg-gray-50">
         <div class="flex items-center justify-between">
           <div>
             <div class="font-medium text-gray-900">
               {% if product.user %}
-              <p>Author: {{ product.user.username }}</p>
+              <p>Seller: {{ product.user.username }}</p>
               {% else %}
-              <p>Author: Anonymous</p>
+              <p>Seller: Anonymous</p>
               {% endif %}
             </div>
-            <p class="text-sm text-gray-500">Author</p>
+            <p class="text-sm text-gray-500">Seller</p>
           </div>
         </div>
       </div>
+
+      <div class="px-6 sm:p-8">
+        <h2 class="text-1xl sm:text-2xl font-bold text-gray-700">
+          Deskripsi Produk
+        </h2>
+          <div class="text-gray-700 leading-relaxed whitespace-pre-line text-base sm:text-lg">
+            {{ product.description }}
+          </div>
+      </div>
+
+
     </article>
   </div>
 </div>
