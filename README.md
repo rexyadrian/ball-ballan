@@ -371,6 +371,7 @@ Autentikasi (Authentication) → proses memverifikasi identitas seseorang.
 * Contoh: apakah username dan password cocok dengan user yang terdaftar.
 
 #### Implementasi Django
+
 * Ditangani oleh modul django.contrib.auth.
 
 * Fungsi utama:
@@ -479,3 +480,63 @@ Session menyimpan data user di server, dengan hanya session ID dikirim ke browse
 Asdos pada tutorial 3 sudah cukup membantu. Saya tidak mengalami kesulitan dalam mengerjakan tutorial 3. Penjelasan yang diberikan asdos sudah cukup jelas dan membantu.
 
 ---
+
+# Tugas 5
+
+---
+
+## Urutan Prioritas Pengambilan CSS Selector
+
+* Inline style pada elemen HTML memiliki prioritas tertinggi. ```style="..."```
+
+* ID selector (#id) memiliki prioritas di bawah inline style.
+
+* Class selector, pseudo-class, dan attribute selector (.class, :hover, [type="text"]) memiliki prioritas di bawah ID.
+
+* Element selector dan pseudo-element (p, div, ::before, ::after) memiliki prioritas terendah.
+
+* Aturan dengan !important akan mengabaikan aturan lain meskipun specificity-nya lebih rendah.
+
+## Pentingnya Responsive Design dalam Pengembangan Aplikasi Web
+
+Responsive design adalah pendekatan dalam desain web agar tampilan dapat menyesuaikan berbagai ukuran layar perangkat (desktop, tablet, smartphone). Konsep ini penting karena:
+
+* Memudahkan pengguna mengakses aplikasi dari berbagai perangkat tanpa hambatan.
+
+* Meningkatkan kenyamanan (user experience).
+
+* Mendukung optimasi mesin pencari (SEO).
+
+* Mengurangi kebutuhan dalam membuat versi terpisah untuk perangkat yang berbeda.
+
+### Contoh aplikasi yang sudah memakai resposive design
+* Tokopedia
+* Shopee
+* X
+* Instagram
+
+
+## Margin, Border, Padding
+
+CSS punya 4 lapisan box model: Margin, border, padding, dan content, dengan margin sebagai lapisan terluar dan content sebagai lapisan terdalam.
+
+* Margin adalah jarak terluar elemen untuk memberi spasi antarelemen).
+
+* Border adalah garis tepi yang membungkus elemen.
+
+* Padding adalah jarak antara isi elemen (content) dengan border.
+
+Implementasi:
+```css
+.box {
+  margin: 20px;              /* jarak dari elemen lain */
+  border: 2px solid black;   /* garis tepi */
+  padding: 15px;             /* ruang di dalam kotak */
+}
+```
+
+## Flex Box dan Grid Layout
+
+* Flexbox (Flexible Box Layout) digunakan untuk mengatur layout satu dimensi (baris atau kolom). Cocok untuk elemen yang perlu diratakan atau didistribusikan ruangnya, misalnya navbar, tombol sejajar, atau centering.
+
+* Grid Layout digunakan untuk mengatur layout dua dimensi (baris dan kolom). Cocok untuk membuat layout kompleks seperti dashboard atau galeri gambar.
