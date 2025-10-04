@@ -6,22 +6,22 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     CATEGORY_CHOICES = [
-        ('jersey', 'Jersey'),
-        ('sepatu', 'Sepatu'),
-        ('peralatan', 'Peralatan'),
-        ('aksesoris', 'Aksesoris'),
-        ('jaket', 'Jaket'),
+        ('apparel', 'Apparel'),
+        ('bags', 'Bags'),
+        ('shoes', 'Shoes'),
+        ('equipment', 'Equipment'),
+        ('accessories', 'Accessories'),
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=40)
-    price = models.IntegerField(default=0)
+    price = models.IntegerField()
     description = models.TextField()
     thumbnail = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     is_featured = models.BooleanField(default=False)
 
-    stock = models.PositiveIntegerField(default=0)
+    stock = models.PositiveIntegerField(default=1)
     brand = models.CharField(max_length=20)
     sold = models.PositiveIntegerField(default=0)
     
@@ -29,7 +29,7 @@ class Product(models.Model):
         return self.name
     
     def get_rupiah_price_format(self):
-        return f"Rp{self.price:,}"
+        return f"Rp {self.price:,.0f}".replace(',', '.')
     
     @property
     def is_product_best_seller(self):
