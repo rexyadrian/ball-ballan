@@ -371,6 +371,7 @@ Autentikasi (Authentication) → proses memverifikasi identitas seseorang.
 * Contoh: apakah username dan password cocok dengan user yang terdaftar.
 
 #### Implementasi Django
+
 * Ditangani oleh modul django.contrib.auth.
 
 * Fungsi utama:
@@ -455,7 +456,7 @@ Session menyimpan data user di server, dengan hanya session ID dikirim ke browse
 
 ## Implementasi Tugas 4 secara _step by step_
 
-### 1. Implementasi Fungsi Register, Login, dan Logout User
+### Implementasi Fungsi Register, Login, dan Logout User
 * Membuat fungsi ```register``` dengan memanfaatkan form bawaan Django: ```UserCreationForm()```, dengan request method "POST", kemudian membuat file ```register.html``` sebagai template tampilan untuk user.
 * Membuat fungsi ```login_user``` dengan memanfaatkan form bawaan Django: ```AuthenticationForm```, dan fungsi bawaan Django: ```authenticate``` dan ```login```, dengan request method "POST", kemudian membuat file ```login.html``` sebagai template tampilan untuk user.
 * Membuat fungsi ```logout_user``` dengan memanfaatkan fungsi bawaan Django: ```logout```, yang akan langsung me-_redirect_ tampilan ke laman login.
@@ -479,3 +480,90 @@ Session menyimpan data user di server, dengan hanya session ID dikirim ke browse
 Asdos pada tutorial 3 sudah cukup membantu. Saya tidak mengalami kesulitan dalam mengerjakan tutorial 3. Penjelasan yang diberikan asdos sudah cukup jelas dan membantu.
 
 ---
+
+# Tugas 5
+
+---
+
+## Urutan Prioritas Pengambilan CSS Selector
+
+* Inline style pada elemen HTML memiliki prioritas tertinggi. ```style="..."```
+
+* ID selector (#id) memiliki prioritas di bawah inline style.
+
+* Class selector, pseudo-class, dan attribute selector (.class, :hover, [type="text"]) memiliki prioritas di bawah ID.
+
+* Element selector dan pseudo-element (p, div, ::before, ::after) memiliki prioritas terendah.
+
+* Aturan dengan !important akan mengabaikan aturan lain meskipun specificity-nya lebih rendah.
+
+## Pentingnya Responsive Design dalam Pengembangan Aplikasi Web
+
+Responsive design adalah pendekatan dalam desain web agar tampilan dapat menyesuaikan berbagai ukuran layar perangkat (desktop, tablet, smartphone). Konsep ini penting karena:
+
+* Memudahkan pengguna mengakses aplikasi dari berbagai perangkat tanpa hambatan.
+
+* Meningkatkan kenyamanan (user experience).
+
+* Mendukung optimasi mesin pencari (SEO).
+
+* Mengurangi kebutuhan dalam membuat versi terpisah untuk perangkat yang berbeda.
+
+### Contoh aplikasi yang sudah memakai resposive design
+* Tokopedia
+* Shopee
+* X
+* Instagram
+
+
+## Margin, Border, Padding
+
+CSS punya 4 lapisan box model: Margin, border, padding, dan content, dengan margin sebagai lapisan terluar dan content sebagai lapisan terdalam.
+
+* Margin adalah jarak terluar elemen untuk memberi spasi antarelemen).
+
+* Border adalah garis tepi yang membungkus elemen.
+
+* Padding adalah jarak antara isi elemen (content) dengan border.
+
+Implementasi:
+```css
+.box {
+  margin: 20px;              /* jarak dari elemen lain */
+  border: 2px solid black;   /* garis tepi */
+  padding: 15px;             /* ruang di dalam kotak */
+}
+```
+
+## Flex Box dan Grid Layout
+
+### Flexbox (Flexible Box Layout)
+Flexbox digunakan untuk mengatur layout satu dimensi (baris atau kolom). Cocok untuk elemen yang perlu diratakan atau didistribusikan ruangnya, misalnya navbar, tombol sejajar, atau centering.
+contoh:
+```css
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+```
+
+### Grid Layout
+Grid layout digunakan untuk mengatur layout dua dimensi (baris dan kolom). Cocok untuk membuat layout kompleks seperti dashboard atau galeri gambar.
+contoh:
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+```
+
+## Implementasi Tugas 4 secara _step by step_
+
+* Membuat fitur hapus dan edit produk pada ```views.py```, routing pada ```urls.py```, lalu template html pada ```edit_product.html```
+* Menggunakan framework tailwind css untuk kustomisasi design.
+* Membuat kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya, serta menambahkan ```card_product.html``` dan ```navbar.html```
+* Membuat design untuk tiap template html agar seragam dan responsive antardevice.
+* Membuat tampilan jika sudah ada produk dan belum ada produk.
