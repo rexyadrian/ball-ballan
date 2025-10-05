@@ -8,8 +8,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from main.forms import ProductForm
-from main.models import Product
+from main.forms import ProductForm, StoreForm
+from main.models import Product, Store
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -72,17 +72,54 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+def create_store(request):
+    form = StoreForm(request.POST or None, request.FILES or None)
+
+    # cek apakah user sudah punya store
+    if hasattr(request.user, 'store'):
+        return redirect('main:show_store', user_id=request.user.id)
+
+    if form.is_valid() and request.method == "POST":
+        store_entry = form.save(commit=False)
+        store_entry.user = request.user
+        store_entry.save()
+        return redirect('main:show_store', user_id=request.user.id)
+
+    context = {
+        'form': form
+    }
+    return render(request, "create_store.html", context)
+
+def show_store(request, user_id):
+    store = get_object_or_404(Store, user__id=user_id)
+    products = store.products.all()
+
+    context = {
+        'store': store,
+        'products': products
+    }
+    return render(request, "store_detail.html", context)
+
+# Add Product
 def add_product(request):
+    try:
+        store = request.user.store
+    except Store.DoesNotExist:
+        messages.warning(request, "Kamu harus membuat toko terlebih dahulu sebelum menambah produk.")
+        return redirect('main:create_store')
+
     form = ProductForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
         product_entry = form.save(commit = False)
         product_entry.user = request.user
+        product_entry.store = store
         product_entry.save()
         return redirect('main:show_main')
 
     context = {
-        'form': form
+        'form': form,
+        'store': store,
     }
     return render(request, "add_product.html", context)
 
