@@ -46,7 +46,8 @@
             <!-- Featured Image -->
             {% if product.thumbnail %}
             <div class="px-6 sm:px-8">
-                <img src="{{ product.thumbnail }}" alt="{{ product.name }}"
+                <img src="{{ product.thumbnail }}"
+                    alt="{{ product.name }}"
                     class="w-full h-64 sm:h-80 lg:h-full object-cover rounded-lg">
             </div>
             {% endif %}
@@ -69,13 +70,14 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="font-medium text-gray-900">
-                            {% if product.user %}
-                            <p>Seller: {{ product.user.username }}</p>
+                            {% if product.store %}
+                                <a href="{% url 'main:show_store' user.id %}">
+                                    Store by: {{ product.store.name }}
+                                </a>
                             {% else %}
-                            <p>Seller: Anonymous</p>
+                                <p>Store by: Anonymous</p>
                             {% endif %}
                         </div>
-                        <p class="text-sm text-gray-500">Seller</p>
                     </div>
                 </div>
             </div>

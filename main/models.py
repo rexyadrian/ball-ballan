@@ -2,8 +2,19 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
+class Store(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(max_length=40, unique=True)
+    description = models.TextField()
+    address = models.CharField(max_length=255, blank=True, null=True)
+    profile = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, related_name='products')
 
     CATEGORY_CHOICES = [
         ('apparel', 'Apparel'),

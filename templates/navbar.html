@@ -3,7 +3,9 @@
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
                 <h1 class="text-xl font-semibold text-gray-900">
-                    <span style="color: #0043ae; font-weight: 700;">Ball-Ballan</span> Shop
+                    <a href="{% url 'main:show_main' %}" class="hover:underline">
+                        <span style="color: #0043ae; font-weight: 700;">Ball-Ballan</span> Shop
+                    </a>
                 </h1>
             </div>
 
@@ -16,6 +18,24 @@
                     class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
                     Add Product
                 </a>
+                {% if user.is_authenticated %}
+                    {% if user.store %}
+                        <a href="{% url 'main:show_store' user.id %}"
+                            class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                            Store
+                        </a>
+                    {% else %}
+                        <a href="{% url 'main:create_store' %}"
+                            class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                            Store
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}" 
+                        class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                        Store
+                    </a>
+                {% endif %}
             </div>
 
             <!-- Desktop User Section -->
@@ -66,6 +86,24 @@
                     class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
                     Add Product
                 </a>
+                {% if user.is_authenticated %}
+                    {% if user.store %}
+                        <a href="{% url 'main:show_store' user.id %}"
+                            class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                            Store
+                        </a>
+                    {% else %}
+                        <a href="{% url 'main:create_store' %}"
+                            class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                            Store
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}" 
+                        class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                        Store
+                    </a>
+                {% endif %}
             </div>
 
             <!-- Mobile User Section -->
