@@ -17,82 +17,282 @@
             </a>
         </div>
 
+        <!-- Loading State -->
+        <div id="loading-state" class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+            <svg class="animate-spin h-8 w-8 text-[#0043ae] inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                </circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+                </path>
+            </svg>
+            <p class="text-gray-600 mt-3">Loading Product Detail...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="bg-white rounded-lg border border-gray-200 p-12 text-center hidden">
+            <div class="w-16 h-16 mx-auto mb-4">
+                <div class="text-red-500 text-5xl">
+                    ⚠️
+                </div>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
+                Failed to load product
+            </h3>
+            <p class="text-gray-500">Please try again later.</p>
+        </div>
+
         <!-- Details -->
-        <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-
-            <!-- Header -->
-            <div class="p-6 sm:p-8">
-                <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span
-                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-[#0043ae] text-white">
-                        {{ product.category }}
-                    </span>
-                    {% if product.is_featured %}
-                    <span
-                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
-                        Featured
-                    </span>
-                    {% endif %}
-                    {% if product.is_product_best_seller %}
-                    <span
-                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800">
-                        Best Seller!
-                    </span>
-                    {% endif %}
+        <article id="product-content" class="bg-white rounded-lg border border-gray-200 overflow-hidden hidden">
+            <div class="flex flex-col lg:flex-row items-start gap-8 p-6 sm:p-8">
+                <!-- Product Image -->
+                <div id="product-image-container" class="w-full lg:w-1/2 p-6 sm:p-8 flex justify-center items-center">
+                    <img id="product-image" 
+                        src="" 
+                        alt="" 
+                        class="w-full aspect-square object-cover rounded-lg flex-shrink-0">
                 </div>
 
-            </div>
+                <!-- Product Info -->
+                <div class="w-full lg:w-1/2 flex flex-col justify-between">
+                    <!-- Header -->
+                    <div class="p-6 sm:p-8">
+                        <div id="badges-container" class="flex flex-wrap items-center gap-2 mb-4">
+                            <!-- Dynamic badges -->
+                        </div>
 
-            <!-- Featured Image -->
-            {% if product.thumbnail %}
-            <div class="px-6 sm:px-8">
-                <img src="{{ product.thumbnail }}"
-                    alt="{{ product.name }}"
-                    class="w-full h-64 sm:h-80 lg:h-full object-cover rounded-lg">
-            </div>
-            {% endif %}
+                        <!-- Name -->
+                        <h1 id="product-name" class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
+                            <!-- Product name will be inserted here -->
+                        </h1>
 
-            <!-- Content -->
-            <div class="p-6 sm:p-8">
-                <div class="prose prose-lg max-w-none">
-                    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
-                        {{ product.name }}
-                    </h1>
+                        <!-- Price -->
+                        <h2 id="product-price" class="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight mb-4 border-t border-gray-200 pt-4 mt-4">
+                            <!-- Product price -->
+                        </h2>
 
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight mb-4">
-                        {{ product.get_rupiah_price_format }}
-                    </h2>
-                </div>
-            </div>
+                        <!-- Store Info -->
+                        <div class="bg-gray-50 py-4 mt-4 mb-4">
+                            <div class="flex items-start gap-4">
+                                
+                                <!-- Store Logo -->
+                                <div id="store-logo" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md flex-shrink-0">
+                                    <span class="text-gray-400 text-xs italic">Loading...</span>
+                                </div>
 
-            <!-- Seller Info -->
-            <div class="border-t border-gray-200 p-6 sm:p-8 bg-gray-50">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <div class="font-medium text-gray-900">
-                            {% if product.store %}
-                                <a href="{% url 'main:show_store' user.id %}">
-                                    Store by: {{ product.store.name }}
-                                </a>
-                            {% else %}
-                                <p>Store by: Anonymous</p>
-                            {% endif %}
+                                <!-- Store Text Info -->
+                                <div>
+                                    <div class="font-medium text-gray-900">
+                                        <a id="product-store" href="#" class="hover:text-blue-600 transition">
+                                            Loading...
+                                        </a>
+                                    </div>
+                                    <div class="text-sm text-gray-500 mt-1">
+                                        <p id="product-store-address">Loading address...</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Brand / Selling -->
+                        <div id="product-selling-container"
+                            class="flex flex-wrap gap-2 mt-6 grid grid-cols-2 sm:grid-cols-1">
+                            <p id="product-brand" class="text-sm text-gray-600"></p>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6">
+                            <div class="prose prose-lg max-w-none">
+                                <h2 class="text-1xl sm:text-2xl font-bold text-gray-800 leading-tight mb-4">
+                                    Deskripsi Produk
+                                </h2>
+                                <div id="product-description" class="text-gray-700 leading-relaxed whitespace-pre-line text-base sm:text-lg">
+                                    <!-- Description -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="px-6 sm:p-8">
-                <h2 class="text-1xl sm:text-2xl font-bold text-gray-700">
-                    Deskripsi Produk
-                </h2>
-                <div class="text-gray-700 leading-relaxed whitespace-pre-line text-base sm:text-lg">
-                    {{ product.description }}
-                </div>
-            </div>
-
-
         </article>
     </div>
 </div>
+
+<script>
+// Configuration
+const PRODUCT_ID = "{{ product.id }}";
+const PRODUCT_DETAIL_ENDPOINT = `{% url 'main:show_json_by_id' '00000000-0000-0000-0000-000000000000' %}`
+                                    .replace('00000000-0000-0000-0000-000000000000',PRODUCT_ID);
+
+// DOM Elements
+const loadingState = document.getElementById('loading-state');
+const errorState = document.getElementById('error-state');
+const productContent = document.getElementById('product-content');
+const badgesContainer = document.getElementById('badges-container');
+const productName = document.getElementById('product-name');
+const productPrice = document.getElementById('product-price');
+const productImageContainer = document.getElementById('product-image-container');
+const productImage = document.getElementById('product-image');
+const productStore = document.getElementById('product-store');
+const storeLogoContainer = document.getElementById('store-logo');
+const productStoreAddress = document.getElementById('product-store-address');
+const productDescription = document.getElementById('product-description');
+const productBrand = document.getElementById('product-brand');
+const productSellingContainer = document.getElementById('product-selling-container');
+
+// Show/hide page sections
+function showState(state) {
+    loadingState.classList.toggle('hidden', state !== 'loading');
+    errorState.classList.toggle('hidden', state !== 'error');
+    productContent.classList.toggle('hidden', state !== 'ready');
+}
+
+// Get readable category name
+function getCategoryLabel(categoryCode) {
+    const categoryMapping = {
+        apparel: 'Apparel',
+        bags: 'Bags',
+        shoes: 'Shoes',
+        equipment: "Equipment",
+        accessories: 'Accessories',
+    };
+    return categoryMapping[categoryCode] || categoryCode;
+}
+
+function formatRupiah(value) {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0, // ⬅️ hilangkan koma belakang
+        maximumFractionDigits: 0, // ⬅️ hilangkan koma belakang
+    }).format(value);
+}
+
+// Render article content
+function renderArticle(product) {
+    // Set name
+    productName.textContent = product.name;
+    document.title = `${product.name} - Ball-Ballan`;
+    
+    // Set badges
+    badgesContainer.innerHTML = '';
+    productSellingContainer.innerHTML = '';
+    
+    // Category badge
+    const categoryBadge = document.createElement('span');
+    categoryBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-[#0043ae] text-white';
+    categoryBadge.textContent = getCategoryLabel(product.category);
+    badgesContainer.appendChild(categoryBadge);
+    
+    // Featured badge
+    if (product.is_featured) {
+        const featuredBadge = document.createElement('span');
+        featuredBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800';
+        featuredBadge.textContent = 'Featured';
+        badgesContainer.appendChild(featuredBadge);
+    }
+    
+    // Best Seller
+    if (product.sold > 40) {
+        const bestSellerBadge = document.createElement('span');
+        bestSellerBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800';
+        bestSellerBadge.textContent = 'Best Seller!';
+        badgesContainer.appendChild(bestSellerBadge);
+    }
+    
+    // Set featured image
+    if (product.thumbnail) {
+        productImage.src = product.thumbnail;
+        productImage.alt = product.name;
+        productImageContainer.classList.remove('hidden');
+    } else {
+        productImageContainer.classList.add('hidden');
+    }
+
+    if (product.price) {
+        const formattedPrice = formatRupiah(product.price);
+
+        productPrice.textContent = `${formattedPrice}`;
+    }
+
+    if (product.brand) {
+        productBrand.textContent = product.brand;
+    }
+    
+    // Set description
+    productDescription.textContent = product.description;
+    
+    // Set Store
+    const storeName = product.store?.name || 'Anonymous';
+    productStore.textContent = `${storeName}`;
+
+    if (product.store?.id) {
+        const storeUrl = `{% url 'main:show_store' '0' %}`.replace('0', product.store.id);
+        productStore.href = storeUrl;
+    } else {
+        productStore.removeAttribute('href');
+    }
+    const storeAddress = product.store?.address || 'Address not available';
+    productStoreAddress.textContent = `${storeAddress}`;
+
+    // Logo
+    storeLogoContainer.innerHTML = '';
+
+    if (product.store?.profile) {
+        const logoImg = document.createElement('img');
+        logoImg.src = product.store.profile;
+        logoImg.alt = product.store.name || 'Store logo';
+        logoImg.className = 'w-full h-full object-contain rounded-md';
+        storeLogoContainer.appendChild(logoImg);
+    } else {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'text-gray-400 text-xs italic';
+        placeholder.textContent = 'No logo';
+        storeLogoContainer.appendChild(placeholder);
+    }
+    if (product.brand) {
+        const brandElem = document.createElement('span');
+        brandElem.className = 'text-sm text-gray-600 mr-3';
+        brandElem.textContent = `Brand: ${product.brand}`;
+        productSellingContainer.appendChild(brandElem);
+    }
+
+    // Stock
+    const stockElem = document.createElement('span');
+    stockElem.className = 'text-sm text-gray-600 mr-3';
+    stockElem.textContent = `Stock: ${product.stock}`;
+    productSellingContainer.appendChild(stockElem);
+
+    // Sold
+    const soldElem = document.createElement('span');
+    soldElem.className = 'text-sm text-gray-600';
+    soldElem.textContent = `Sold: ${product.sold}`;
+    productSellingContainer.appendChild(soldElem);
+}
+
+// Fetch product detail
+async function loadProductDetail() {
+    try {
+        showState('loading');
+        
+        const response = await fetch(PRODUCT_DETAIL_ENDPOINT, {
+            headers: { 'Accept': 'application/json' },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch product detail');
+        }
+
+        const productData = await response.json();
+        renderArticle(productData);
+        showState('ready');
+    } catch (error) {
+        console.error('Error loading product detail:', error);
+        showState('error');
+    }
+}
+
+// Initialize page
+loadProductDetail();
+</script>
 {% endblock content %}

@@ -23,8 +23,7 @@
             <!-- Header -->
             <div class="p-6 sm:p-8">
                 <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span
-                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-[#0043ae] text-white">
+                    <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-[#0043ae] text-white">
                         Toko
                     </span>
                 </div>
@@ -90,13 +89,15 @@
                                 alt="No product available" class="w-full h-full object-contain">
                         </div>
                         <p class="text-gray-500 mb-6">
-                            Iino Miko says "There is no product!"
+                            Iino Miko says "There is no product in this store!"
                         </p>
 
-                        <a href="{% url 'main:add_product' %}"
-                            class="inline-flex items-center px-4 py-2 bg-[#0043ae] text-white rounded-md hover:bg-[#003080] transition-colors">
-                            Add Product
-                        </a>
+                        {% if request.user == store.user %}
+                            <a href="{% url 'main:add_product' %}"
+                                class="inline-flex items-center px-4 py-2 bg-[#0043ae] text-white rounded-md hover:bg-[#003080] transition-colors">
+                                Add Product
+                            </a>
+                        {% endif %}
                     </div>
                     {% else %}
                     <div

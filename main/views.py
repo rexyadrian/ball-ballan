@@ -170,6 +170,11 @@ def show_json(request):
             'brand': product.brand,
             'sold': product.sold,
             'user_id': product.user_id,
+            "store": {
+                "name": product.store.name if product.store else None,
+                "address": product.store.address if product.store else None,
+                "profile": product.store.profile if product.store else None,
+            }
         }
         for product in product_list
     ]
@@ -185,9 +190,27 @@ def show_xml_by_id(request, id):
        return HttpResponse(status=404)
 
 def show_json_by_id(request, id):
-   try:
-       product_item = Product.objects.get(pk=id)
-       json_data = serializers.serialize("json", [product_item])
-       return HttpResponse(json_data, content_type="application/json")
-   except product_item.DoesNotExist:
-       return HttpResponse(status=404)
+    try:
+        product = Product.objects.select_related('user').get(pk=id)
+        data = {
+            'id': str(product.id),
+            'name': product.name,
+            'price': product.price,
+            'description': product.description,
+            'thumbnail': product.thumbnail,
+            'category': product.category,
+            'is_featured': product.is_featured,
+            'stock': product.stock,
+            'brand': product.brand,
+            'sold': product.sold,
+            'user_id': product.user_id,
+            "store": {
+                "id": product.store.user.id if product.store.user else None,
+                "name": product.store.name if product.store else None,
+                "address": product.store.address if product.store else None,
+                "profile": product.store.profile if product.store else None,
+            }
+        }
+        return JsonResponse(data)
+    except Product.DoesNotExist:
+        return JsonResponse({'detail': 'Not found'}, status=404)
