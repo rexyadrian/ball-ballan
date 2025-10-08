@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                alert("Registration successful! Your account has been created.");
+                showToast("Registration successful!", "Your account has been created.", "success");
                 window.location.href = "{% url 'main:login' %}";
             } else {
                 let messages = [];
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     messages.push("Please check your form entries.");
                 }
 
-                messages.forEach(msg => alert("Registration Failed: " + msg));
+                messages.forEach(msg => showToast("Registration Failed", msg, "error"));
             }
         })
         .catch(() => showToast("Something went wrong", "Server is not responding.", "error"))

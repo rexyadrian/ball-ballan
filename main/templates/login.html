@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                alert("You have successfully logged in. Welcome back!");
+                showToast("Welcome back!", "You have successfully logged in.", "success");
                 setTimeout(() => window.location.href = "{% url 'main:show_main' %}", 1000);
             } else {
                 const msg = data.error || "Username or password is incorrect.";

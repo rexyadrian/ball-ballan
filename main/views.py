@@ -76,10 +76,13 @@ def login_user(request):
   
     return render(request, "login.html")
 
+@csrf_exempt
 def logout_user(request):
     logout(request)
-    response = HttpResponseRedirect(reverse('main:login'))
-    response.delete_cookie('last_login')
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({"success": True})
+    response = HttpResponseRedirect(reverse("main:login"))
+    response.delete_cookie("last_login")
     return response
 
 def create_store(request):
