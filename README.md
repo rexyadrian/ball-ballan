@@ -520,7 +520,7 @@ Responsive design adalah pendekatan dalam desain web agar tampilan dapat menyesu
 
 CSS punya 4 lapisan box model: Margin, border, padding, dan content, dengan margin sebagai lapisan terluar dan content sebagai lapisan terdalam.
 
-* Margin adalah jarak terluar elemen untuk memberi spasi antarelemen).
+* Margin adalah jarak terluar elemen untuk memberi spasi antarelemen.
 
 * Border adalah garis tepi yang membungkus elemen.
 
@@ -560,10 +560,61 @@ contoh:
 }
 ```
 
-## Implementasi Tugas 4 secara _step by step_
+## Implementasi Tugas 5 secara _step by step_
 
 * Membuat fitur hapus dan edit produk pada ```views.py```, routing pada ```urls.py```, lalu template html pada ```edit_product.html```
 * Menggunakan framework tailwind css untuk kustomisasi design.
 * Membuat kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya, serta menambahkan ```card_product.html``` dan ```navbar.html```
 * Membuat design untuk tiap template html agar seragam dan responsive antardevice.
 * Membuat tampilan jika sudah ada produk dan belum ada produk.
+
+---
+# Tugas 6
+
+---
+
+## Perbedaan Synchronous Request dan Asynchronous Request
+
+### Synchronous Request
+- Request yang harus menunggu response sebelum bisa melanjutkan eksekusi kode berikutnya.
+- Contoh: Submit form HTML biasa → browser reload page menunggu server response.
+### Asynchronous Request
+- Request yang dijalankan di background, eksekusi kode berikutnya tidak perlu menunggu response.
+- Contoh: AJAX request → page tetap bisa interaktif saat data dikirim/diterima.
+
+## Cara AJAX bekerja di Django
+
+1. Client-side (JavaScript)
+
+- Event terjadi → misal ketika user klik tombol Submit.
+- JavaScript membuat AJAX request (misal menggunakan fetch()) ke URL tertentu.
+
+2. Server-side (Django View)
+
+- Django menerima request melalui URL mapping di urls.py.
+- View memproses request → biasanya memvalidasi data, query database, dan lain-lain.
+- View mengembalikan response JSON dengan ```JsonResponse```.
+
+3. Client menerima response
+
+- JavaScript menangkap response.
+- Update DOM sesuai data yang diterima → tanpa reload halaman penuh.
+
+## Keuntungan menggunakan AJAX
+
+- Tidak perlu reload halaman penuh → lebih cepat dan seamless.
+- Update sebagian halaman → hanya konten yang berubah saja, mengurangi bandwidth.
+- UX lebih interaktif → misalnya loading state atau form validasi real-time.
+- Bisa membuat SPA sederhana (Single Page Application) tanpa harus pakai framework frontend penuh.
+
+## Memastikan keamanan penggunaan AJAX untuk fitur Login dan Register
+- Pastikan AJAX request menyertakan token CSRF
+- Pastikan request dikirim melalui HTTPS supaya data sensitif (password) terenkripsi.
+- Selalu validasi username/password di server.
+- Selalu pakai POST untuk login/register.
+
+## Pengaruh AJAX terhadap User Experience (UX)
+- Lebih responsif → user tidak menunggu page reload.
+- Interaktivitas lebih tinggi → loading state atau form validasi real-time.
+- Persepsi kecepatan meningkat → walaupun data yang digunakan sama, UX terasa lebih cepat.
+- Kontrol UI lebih fleksibel → bisa menampilkan spinner, toast, atau inline messages saat loading.

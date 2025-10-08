@@ -25,7 +25,6 @@ def show_main(request):
         'app_name' : 'Ball-Ballan',
         'npm' : '2406495666',
         'name': request.user.username,
-        # 'name': 'Rexy Adrian Fernando',
         'class': 'PBP D',
         'product_list': product_list,
         'last_login': request.COOKIES.get('last_login', 'Never'),
