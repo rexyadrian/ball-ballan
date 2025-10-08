@@ -149,4 +149,9 @@
 
     return false;
   }
+
+  document.getElementById("productForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      addProductEntry();
+  })
 </script>
