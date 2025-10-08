@@ -16,11 +16,6 @@
             <p class="text-gray-600">Stay updated with the latest football product and tools</p>
         </div>
 
-        <button
-  onclick="showToast('Sample Title', 'This is a sample message for the toast notification.')"
->
-  Click to Show Toast
-</button>
         <!-- Filter Section -->
         <div
             class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-white rounded-lg border border-gray-200 p-4">
@@ -33,6 +28,10 @@
                     class="bg-[#0043ae] text-white bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium transition-colors hover:bg-[#003080] hover:text-white">
                     My Product
                 </a>
+
+                <button onclick="showModal()" class="inline-flex items-center px-4 py-2 bg-white text-[#0043ae] font-semibold outline outline-2 outline-[#0043ae] outline-offset-[-2px] rounded-md hover:bg-[#003080] hover:text-white transition-colors mb-4">
+                    Add Product by AJAX
+                </button>
             </div>
             {% if user.is_authenticated %}
             <div class="text-sm text-gray-500">
@@ -296,6 +295,12 @@
 
         fetchProductFromServer();
     }
+
+    // Add event listener to detect new prod
+    document.addEventListener('productAdded', function() {
+        // Refresh data without page reload
+        fetchProductFromServer();
+    });
 
     // Start application
     initializeProductPage();

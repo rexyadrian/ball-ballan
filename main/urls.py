@@ -14,6 +14,7 @@ from main.views import (
     show_json,
     show_xml_by_id,
     show_json_by_id,
+    add_product_ajax
 )
 
 app_name = 'main'
@@ -33,4 +34,5 @@ urlpatterns = [
     path('products/<str:id>/', show_product, name='show_product'),
     path('products/<str:id>/edit/', edit_product, name='edit_product'),
     path('products/<str:id>/delete/', delete_product, name='delete_product'),
+    path('add-product-ajax',add_product_ajax, name='add_product_ajax'),
 ]

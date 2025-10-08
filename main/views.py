@@ -227,3 +227,46 @@ def show_json_by_id(request, id):
         return JsonResponse(data)
     except Product.DoesNotExist:
         return JsonResponse({'detail': 'Not found'}, status=404)
+    
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from .models import Product, Store
+
+@csrf_exempt
+@require_POST
+def add_product_ajax(request):
+    user = request.user
+
+    try:
+        store = user.store
+    except Store.DoesNotExist:
+        return HttpResponse(b"STORE_NOT_FOUND", status=400)
+
+    name = request.POST.get("name")
+    price = request.POST.get("price")
+    description = request.POST.get("description")
+    category = request.POST.get("category")
+    thumbnail = request.POST.get("thumbnail")
+    is_featured = request.POST.get("is_featured") == "on"
+    stock = request.POST.get("stock")
+    brand = request.POST.get("brand")
+
+    if not all([name, price, description, category, stock, brand]):
+        return HttpResponse(b"INVALID_DATA", status=400)
+
+    new_product = Product(
+        user=user,
+        store=store,
+        name=name,
+        price=int(price),
+        description=description,
+        category=category,
+        thumbnail=thumbnail or None,
+        is_featured=is_featured,
+        stock=int(stock),
+        brand=brand
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
