@@ -70,30 +70,6 @@
                             <!-- Product price -->
                         </h2>
 
-                        <!-- Store Info -->
-                        <div class="bg-gray-50 py-4 mt-4 mb-4">
-                            <div class="flex items-start gap-4">
-                                
-                                <!-- Store Logo -->
-                                <div id="store-logo" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md flex-shrink-0">
-                                    <span class="text-gray-400 text-xs italic">Loading...</span>
-                                </div>
-
-                                <!-- Store Text Info -->
-                                <div>
-                                    <div class="font-medium text-gray-900">
-                                        <a id="product-store" href="#" class="hover:text-blue-600 transition">
-                                            Loading...
-                                        </a>
-                                    </div>
-                                    <div class="text-sm text-gray-500 mt-1">
-                                        <p id="product-store-address">Loading address...</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
                         <!-- Brand / Selling -->
                         <div id="product-selling-container"
                             class="flex flex-wrap gap-2 mt-6 grid grid-cols-2 sm:grid-cols-1">
@@ -133,9 +109,6 @@ const productName = document.getElementById('product-name');
 const productPrice = document.getElementById('product-price');
 const productImageContainer = document.getElementById('product-image-container');
 const productImage = document.getElementById('product-image');
-const productStore = document.getElementById('product-store');
-const storeLogoContainer = document.getElementById('store-logo');
-const productStoreAddress = document.getElementById('product-store-address');
 const productDescription = document.getElementById('product-description');
 const productBrand = document.getElementById('product-brand');
 const productSellingContainer = document.getElementById('product-selling-container');
@@ -221,41 +194,6 @@ function renderArticle(product) {
     
     // Set description
     productDescription.textContent = product.description;
-    
-    // Set Store
-    const storeName = product.store?.name || 'Anonymous';
-    productStore.textContent = `${storeName}`;
-
-    if (product.store?.id) {
-        const storeUrl = `{% url 'main:show_store' '0' %}`.replace('0', product.store.id);
-        productStore.href = storeUrl;
-    } else {
-        productStore.removeAttribute('href');
-    }
-    const storeAddress = product.store?.address || 'Address not available';
-    productStoreAddress.textContent = `${storeAddress}`;
-
-    // Logo
-    storeLogoContainer.innerHTML = '';
-
-    if (product.store?.profile) {
-        const logoImg = document.createElement('img');
-        logoImg.src = product.store.profile;
-        logoImg.alt = product.store.name || 'Store logo';
-        logoImg.className = 'w-full h-full object-contain rounded-md';
-        storeLogoContainer.appendChild(logoImg);
-    } else {
-        const placeholder = document.createElement('span');
-        placeholder.className = 'text-gray-400 text-xs italic';
-        placeholder.textContent = 'No logo';
-        storeLogoContainer.appendChild(placeholder);
-    }
-    if (product.brand) {
-        const brandElem = document.createElement('span');
-        brandElem.className = 'text-sm text-gray-600 mr-3';
-        brandElem.textContent = `Brand: ${product.brand}`;
-        productSellingContainer.appendChild(brandElem);
-    }
 
     // Stock
     const stockElem = document.createElement('span');
