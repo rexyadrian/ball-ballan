@@ -12,6 +12,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from main.forms import ProductForm
 from main.models import Product
+import requests
+from django.utils.html import strip_tags
+from django.contrib.auth.models import User
+import json
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -45,13 +49,13 @@ def register(request):
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': True})
             messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login_user')
+            return redirect('main:login')
         else:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 errors = {
                     field: [str(e) for e in errs] for field, errs in form.errors.items()
                 }
-                return JsonResponse({'success': False, 'error': errors})
+                return JsonResponse({'success': False, 'errors': errors})
 
     context = {
         'form': form
@@ -148,7 +152,7 @@ def show_json(request):
             'is_featured': product.is_featured,
             'stock': product.stock,
             'brand': product.brand,
-            'sold': product.sold,
+
             'user_id': product.user_id,
         }
         for product in product_list
@@ -177,7 +181,6 @@ def show_json_by_id(request, id):
             'is_featured': product.is_featured,
             'stock': product.stock,
             'brand': product.brand,
-            'sold': product.sold,
             'user_id': product.user_id,
         }
         return JsonResponse(data)
@@ -215,3 +218,50 @@ def add_product_entry_ajax(request):
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse('No URL provided', status=400)
+    
+    try:
+        # Fetch image from external source
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+        
+        # Return the image with proper content type
+        return HttpResponse(
+            response.content,
+            content_type=response.headers.get('Content-Type', 'image/jpeg')
+        )
+    except requests.RequestException as e:
+        return HttpResponse(f'Error fetching image: {str(e)}', status=500)
+    
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = strip_tags(data.get("name", ""))
+        price = data.get("price", 0)
+        description = strip_tags(data.get("description", ""))
+        thumbnail = data.get("thumbnail", "")
+        category = data.get("category", "")
+        is_featured = data.get("is_featured", False)
+        stock = data.get("stock", 0)
+        brand = strip_tags(data.get("brand", ""))
+
+        new_product = Product(
+            name=name,
+            price=price,
+            description=description,
+            thumbnail=thumbnail,
+            category=category,
+            is_featured=is_featured,
+            stock=stock,
+            brand=brand,
+        )
+
+        new_product.save()
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)

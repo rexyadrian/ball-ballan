@@ -165,14 +165,6 @@ function renderArticle(product) {
         badgesContainer.appendChild(featuredBadge);
     }
     
-    // Best Seller
-    if (product.sold > 40) {
-        const bestSellerBadge = document.createElement('span');
-        bestSellerBadge.className = 'inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800';
-        bestSellerBadge.textContent = 'Best Seller!';
-        badgesContainer.appendChild(bestSellerBadge);
-    }
-    
     // Set featured image
     if (product.thumbnail) {
         productImage.src = product.thumbnail;
@@ -200,12 +192,6 @@ function renderArticle(product) {
     stockElem.className = 'text-sm text-gray-600 mr-3';
     stockElem.textContent = `Stock: ${product.stock}`;
     productSellingContainer.appendChild(stockElem);
-
-    // Sold
-    const soldElem = document.createElement('span');
-    soldElem.className = 'text-sm text-gray-600';
-    soldElem.textContent = `Sold: ${product.sold}`;
-    productSellingContainer.appendChild(soldElem);
 }
 
 // Fetch product detail

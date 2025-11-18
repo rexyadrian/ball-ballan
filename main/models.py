@@ -31,8 +31,6 @@ class Product(models.Model):
         return f"Rp {self.price:,.0f}".replace(',', '.')
     
     @property
-    def is_product_best_seller(self):
-        return self.sold > 40
         
     def increment_stock(self):
         self.stock += 1
