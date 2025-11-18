@@ -23,8 +23,8 @@ def login(request):
             return JsonResponse({
                 "username": user.username,
                 "status": True,
-                "message": "Login successful!"
-                # Add other data if you want to send data to Flutter.
+                "message": "Login successful!",
+                "user_id": user.id
             }, status=200)
         else:
             return JsonResponse({
@@ -66,7 +66,7 @@ def register(request):
         
         return JsonResponse({
             "username": user.username,
-            "status": 'success',
+            "status": True,
             "message": "User created successfully!"
         }, status=200)
     

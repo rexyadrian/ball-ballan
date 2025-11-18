@@ -249,6 +249,7 @@ def create_product_flutter(request):
         is_featured = data.get("is_featured", False)
         stock = data.get("stock", 0)
         brand = strip_tags(data.get("brand", ""))
+        user = request.user
 
         new_product = Product(
             name=name,
@@ -259,6 +260,7 @@ def create_product_flutter(request):
             is_featured=is_featured,
             stock=stock,
             brand=brand,
+            user=user
         )
 
         new_product.save()
