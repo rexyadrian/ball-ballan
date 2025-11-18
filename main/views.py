@@ -186,7 +186,7 @@ def show_json_by_id(request, id):
 
 @csrf_exempt
 @require_POST
-def add_product_ajax(request):
+def add_product_entry_ajax(request):
     user = request.user
 
     name = request.POST.get("name")
